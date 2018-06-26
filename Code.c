@@ -1,4 +1,12 @@
-//1767  20
+/**
+* @file Code.c
+* @author Guido Peñaloza
+* @date 25-06-2018
+* @brief Летняя задача.
+
+Перечень ВУЗов. Ссылка на набор данных: http://data.gov.ua/passport/fa4c3dfd-d1b3-4533-a1f7-cbc691d96ebb
+Функциональность: просмотр, поиск, экспорт найденной информации в текстовый файл
+*/
 
 #include <stdio.h>
 #include <string.h>
@@ -22,9 +30,25 @@ typedef struct {
 	char PosicionJ_NZ[250];
 }DATOS;
 
+/* Вычисление функции buscar_valores(int cod,int row, DATOS *M)
+*
+* @param int cod,int row, DATOS *M
+* @return 
+*/
 void buscar_valores(int cod,int row, DATOS *M);
+
+/* Вычисление функции read_csv(int row, int col, char *filename, DATOS *data)
+*
+* @param int row, int col, char *filename, DATOS *data
+* @return 
+*/
 void read_csv(int row, int col, char *filename, DATOS *data);
 
+/* Вычисление функции main(int argc, char const *argv[])
+*
+* @param int argc, char const *argv[]
+* @return 0
+*/
 int main(int argc, char const *argv[])
 {
 	setlocale(LC_CTYPE, "ukr");
@@ -79,34 +103,10 @@ int main(int argc, char const *argv[])
 	return 0;
 }
 
-/*
-int busquedaBinaria(DATOS *arreglo, int tamano, int clave)
-{
-  int Iarriba = tamano-1;
-  int Iabajo = 0;
-  int Icentro;
-  while (Iabajo <= Iarriba)
-    {
-      Icentro = (Iarriba + Iabajo)/2;
-      if (arreglo[Icentro].cod == clave)
- return Icentro;
-      else
- if (clave < arreglo[Icentro].cod)
-   Iarriba=Icentro-1;
- else
-   Iabajo=Icentro+1;
-    }
-  return -1;
-}
-*/
-
 void buscar_valores(int cod,int row, DATOS *Datos){
-		int ent=0;
-
+	int ent=0;
 	  for(int c=1;c<row;c++){
 		if(Datos[c].cod==cod){
-		//int c=busquedaBinaria(Datos,row,cod);
-		//if(c!=-1){
 			printf("\nКод НЗ: %d",Datos[c].cod);
 			printf("\nПовна назва НЗ (установи): %s",Datos[c].N_I);
 			printf("\nСкор.назва: %s",Datos[c].N_R);
@@ -147,10 +147,6 @@ void buscar_valores(int cod,int row, DATOS *Datos){
 				fprintf(F,"Посада керівника НЗ: %s\n",Datos[c].PosicionJ_NZ);
 				fclose(F);
 			}
-		//}
-		//else{
-			//printf("\nDoes not exist!\n");
-		//}
 		}
 	}
 	if(ent==0){
@@ -221,7 +217,6 @@ void read_csv(int row, int col, char *filename, DATOS *data){
 				j++;
       }
       free(tmp);
-
       i++;
     }
 }
